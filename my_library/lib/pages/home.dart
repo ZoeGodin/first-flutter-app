@@ -8,43 +8,69 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: 40, left: 20, right: 20, ),
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromRGBO(29, 22, 23, 0.11),
-                  blurRadius: 40,
-                  spreadRadius: 0.0
-
-                )
-              ]
-            ),
-            child: TextField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                contentPadding: EdgeInsets.all(12),
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: SvgPicture.asset('assets/icons/Search.svg'),
-                ),
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: SvgPicture.asset('assets/icons/Filter.svg'),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none
-                )
-              ),
-            ),
-          )
+      backgroundColor: Colors.white,
+      body: Column( //same as flex column
+        children: [ //display children of xolumn (will be in order)
+          textField()
         ],
       ),
     );
+  }
+
+  Container textField() {
+    return Container(
+          margin: EdgeInsets.only(top: 40, left: 20, right: 20, ), //make round e
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow( //add shadow around search box to make it more visible
+                color: Color.fromRGBO(29, 22, 23, 0.11),
+                blurRadius: 40,
+                spreadRadius: 0.0
+
+              )
+            ]
+          ),
+          child: TextField(
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
+              contentPadding: EdgeInsets.all(12),
+              hintText: 'Search Pancake', //placeholder
+              hintStyle: TextStyle( //placeholder text
+                color: Color(0xffDDDADA),
+                fontSize: 14,
+              ),
+              prefixIcon: Padding( //icon at beggining
+                padding: const EdgeInsets.all(12),
+                child: SvgPicture.asset('assets/icons/Search.svg'),
+              ),
+              suffixIcon: Container( //icon at end
+                width: 100,
+                child: IntrinsicHeight( //need to put Intrinsic Height to have the small bar divider
+                  child: Row( //align the elements in a row (same as flex)
+                    mainAxisAlignment: MainAxisAlignment.end, //equivalent of flex
+                    children: [
+                      VerticalDivider( //bar divider
+                        color: Colors.black,
+                        indent: 10,
+                        endIndent: 10,
+                        thickness: 0.15,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: SvgPicture.asset('assets/icons/Filter.svg'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+                borderSide: BorderSide.none
+              )
+            ),
+          ),
+        );
   }
 
   AppBar appBar() {
